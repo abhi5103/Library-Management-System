@@ -4,27 +4,27 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Pankaj Yadav
  */
-public class IssueBook extends javax.swing.JFrame {
-
-    Connection con;
+public class ReturnBook extends javax.swing.JFrame {
+    
+     Connection con;
     Statement stmt;
     ResultSet rs;
     String query;
     Date date=new Date();
     SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-    String  checkAvailability,SName,Address,SStream,SClass;
+
     /**
      * Creates new form ReturnBook
      */
-    public IssueBook() {
+    public ReturnBook() {
         initComponents();
     }
 
@@ -47,27 +47,21 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         t4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        t5 = new javax.swing.JTextField();
+        t6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        t6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        t5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                OnCreate(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Lucida Handwriting", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("Issue Book");
+        jLabel1.setText("Return Book");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Student Id");
@@ -94,16 +88,7 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel4.setText("Book Id");
 
         t3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t3ActionPerformed(evt);
-            }
-        });
-        t3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                t3KeyReleased(evt);
-            }
-        });
+        t3.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Book name");
@@ -112,20 +97,15 @@ public class IssueBook extends javax.swing.JFrame {
         t4.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Issue Date");
+        jLabel6.setText("Return Date");
 
-        t5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t5.setEnabled(false);
-        t5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t5ActionPerformed(evt);
-            }
-        });
+        t6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        t6.setEnabled(false);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Issue");
+        jButton1.setText("Return");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -165,7 +145,7 @@ public class IssueBook extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(0, 102, 102));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Return Book");
+        jButton5.setText("Issue Book");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -182,80 +162,68 @@ public class IssueBook extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(0, 102, 102));
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Student Registration");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        t6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t6.setEnabled(false);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Available");
+        jLabel7.setText("Issued On");
+
+        t5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        t5.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addGap(179, 179, 179)
+                .addComponent(jButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(205, 268, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(316, 316, 316))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(296, 296, 296)))
-                                .addGap(252, 252, 252))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(t6)
+                                .addComponent(t5, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                            .addGap(323, 323, 323))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(24, 24, 24)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton1)
+                                        .addComponent(jButton4))
+                                    .addGap(76, 76, 76)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addGap(83, 83, 83)
-                                            .addComponent(jButton1)
-                                            .addGap(112, 112, 112)
-                                            .addComponent(jButton2))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jButton3)
-                                            .addGap(45, 45, 45)
-                                            .addComponent(jButton4)
-                                            .addGap(50, 50, 50)
                                             .addComponent(jButton5)
-                                            .addGap(55, 55, 55)
-                                            .addComponent(jButton6)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(58, 58, 58)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(t5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(t6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(132, 132, 132)))))
-                                .addContainerGap())))))
+                                            .addGap(57, 57, 57)
+                                            .addComponent(jButton6))
+                                        .addComponent(jButton2)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addGap(94, 94, 94)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(98, 98, 98)
+                            .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(332, 332, 332))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(243, 243, 243)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,38 +234,37 @@ public class IssueBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(t6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(t5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(t5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(t6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addGap(19, 19, 19))
+                    .addComponent(jButton6))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -313,62 +280,8 @@ public class IssueBook extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void OnCreate(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_OnCreate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_OnCreate
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(t2.getText().equals("")) 
-            JOptionPane.showMessageDialog(this,"मान ना मान मैं तेरा मेहमान\nama yaar pehle registration to karwao");
-        else
-        {
-                try
-                    {
-                        connect();
-                        query="select * from books where BookId='"+t3.getText()+"';";
-                        
-                        rs=stmt.executeQuery(query); 
-                        rs.next();
-                        if(t6.getText().equals("YES"))
-                        {
-                            query="insert into issue values('"+t1.getText()+"','"+t2.getText()+"','"+t3.getText()+"','"+t4.getText()+"','"+Address+"','"+t5.getText()+"','"+SStream+"','"+SClass+"');";
-                            
-                            stmt.executeUpdate(query);
-                            JOptionPane.showMessageDialog(this,"Book with id = "+t3.getText()+" has been issued to "+t2.getText());
-                            query="update books set Available='NO' where BookId='"+t3.getText()+"';";
-                            stmt.executeUpdate(query);
-                            
-                            
-                        }
-                        if(t6.getText().equals("NO"))
-                        {
-                            JOptionPane.showMessageDialog(this,"Book with this id is not available currently");
-                        }
-                        if(t6.getText().equals(""))
-                        {
-                            JOptionPane.showMessageDialog(this,"There is no book in the library with this id");
-                        }
-                        
-                            t4.setText("");
-                            t1.setText("");
-                            t2.setText("");
-                            t3.setText("");
-                            t6.setText("");
-                        disconnect();
-
-                    }
-                    catch(SQLException e)
-                    {
-                        if(e.getErrorCode()==1062)
-                        JOptionPane.showMessageDialog(this,"A student can only get a single book from library at a time ");
-                    }
-                }
-                
-                
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        MainLayer mn=new MainLayer();
+       MainLayer mn=new MainLayer();
         mn.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -380,16 +293,10 @@ public class IssueBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        ReturnBook rb=new ReturnBook();
-        rb.setVisible(true);
+        IssueBook ib=new IssueBook();
+        ib.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        RegisterStudent r=new RegisterStudent();
-        r.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         IssuedBooks ibs=new IssuedBooks();
@@ -401,58 +308,67 @@ public class IssueBook extends javax.swing.JFrame {
         try
         {
             connect();
-            query="select * from student where StudentId='"+t1.getText()+"';";
+            query="select * from issue where StudentId='"+t1.getText()+"';";
             rs=stmt.executeQuery(query); 
-            if(rs.next())
+            int i=0;
+            while(rs.next())
             {
-                SName=rs.getString("StudentName");
-                Address=rs.getString("Address");
-                SStream=rs.getString("SStream");
-                SClass=rs.getString("SClass");
-                t2.setText(SName);
+                i++;
+            t2.setText(rs.getString("StudentName"));
+            t3.setText(rs.getString("BookId"));
+            t4.setText(rs.getString("BookName"));
+            t5.setText(rs.getString("IssueDate"));
             }
-            else
-                t2.setText("");
             disconnect();
+            if(i==0)
+            {
+                t2.setText("");
+                t3.setText("");
+                t4.setText("");
+                t5.setText("");
+            }
         }
         catch(Exception e)
         {
             System.out.println(e);
         }
-        t5.setText(format.format(date));
+        t6.setText(format.format(date));
     }//GEN-LAST:event_t1KeyReleased
 
-    private void t3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t3KeyReleased
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try
         {
             connect();
-            query="select * from books where BookId='"+t3.getText()+"';";
-            rs=stmt.executeQuery(query); 
+            query="select * from issue where StudentId='"+t1.getText()+"';";
+            rs=stmt.executeQuery(query);
+            
             if(rs.next())
             {
-                t6.setText(rs.getString("Available"));
-            t4.setText(rs.getString("BookName"));
+                query="insert into returndetail values('"+t1.getText()+"','";
+                query+=t2.getText()+"','"+t3.getText()+"','"+t4.getText()+"','"+t5.getText()+"','"+t6.getText()+"');";
+                stmt.executeUpdate(query);
+                query="delete from issue where StudentId='"+t1.getText()+"';";
+                stmt.executeUpdate(query);
+                query="update books set Available='YES' where BookId='"+t3.getText()+"';";
+                stmt.executeUpdate(query);
+                disconnect();
+                JOptionPane.showMessageDialog(this,"Thank you! visit again");
+                t4.setText("");
+                            t1.setText("");
+                            t2.setText("");
+                            t3.setText("");
+                            t5.setText("");
             }
             else
             {
-                t6.setText("");
-                t4.setText("");
+                JOptionPane.showMessageDialog(this,"No book is issued on this id currently");
             }
-            disconnect();
         }
-        catch(Exception e)
+        catch(SQLException e)
         {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(this,e);
         }
-    }//GEN-LAST:event_t3KeyReleased
-
-    private void t5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t5ActionPerformed
-
-    private void t3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t3ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,11 +400,11 @@ public class IssueBook extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IssueBook().setVisible(true);
+                new ReturnBook().setVisible(true);
             }
         });
     }
-
+    
     public void connect()
     {
         try
@@ -514,7 +430,7 @@ public class IssueBook extends javax.swing.JFrame {
         {}
 
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -522,7 +438,6 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
